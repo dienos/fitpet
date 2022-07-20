@@ -1,6 +1,5 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
     }
@@ -12,7 +11,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "base.architecture"
+rootProject.name = "jth.fitpet"
 include ':presentation'
 include ':data'
 include ':domain'

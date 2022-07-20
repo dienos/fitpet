@@ -1,26 +1,29 @@
 plugins {
-    id(Plugins.application)
-    id(Plugins.kotlin)
-    id(Plugins.kapt)
-    id(Plugins.hilt)
+    id(Config.Plugins.application)
+    id(Config.Plugins.kotlin)
+    id(Config.Plugins.kapt)
+    id(Config.Plugins.hilt)
 }
 
 android {
-    compileSdk = Version.compileSdk
+    compileSdk = Config.Version.compileSdk
 
     defaultConfig {
         applicationId = Config.applicationId
-        minSdk = Version.minSdk
-        targetSdk = Version.targetSdk
-        versionCode = Version.versionCode
-        versionName = Version.versionName
-        testInstrumentationRunner = Config.Test.jUnitRunner
+        minSdk = Config.Version.minSdk
+        targetSdk = Config.Version.targetSdk
+        versionCode = Config.Version.versionCode
+        versionName =Config.Version.versionName
+        testInstrumentationRunner = Config.Android.Test.jUnitRunner
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -28,18 +31,22 @@ android {
         targetCompatibility(JavaVersion.VERSION_1_8)
     }
     kotlinOptions {
-        jvmTarget ="1.8"
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        dataBinding = true
     }
 }
 
 dependencies {
-    implementation(project(Modules.data) )
-    implementation(project(Modules.domain))
+    implementation(project(Config.Modules.data))
+    implementation(project(Config.Modules.domain))
 
-    implementation(Config.Hilt.hiltAndroid)
-    kapt(Config.Hilt.hiltAndroidCompiler)
-    kapt(Config.Hilt.hiltCompiler)
-    implementation(Config.Hilt.hiltLifecycleViewModel)
+    implementation(Config.Android.Hilt.hiltAndroid)
+    kapt(Config.Android.Hilt.hiltAndroidCompiler)
+    kapt(Config.Android.Hilt.hiltCompiler)
+    implementation(Config.Android.Hilt.hiltLifecycleViewModel)
 
     implementation(Config.Kotlin.Coroutine.coroutines)
     testImplementation(Config.Kotlin.Coroutine.coroutineTest)
@@ -54,6 +61,9 @@ dependencies {
     implementation(Config.Square.retrofitRxJava3Adapter)
     implementation(Config.Square.okhttp)
     implementation(Config.Square.okhttpLogging)
+
+    implementation(Config.Android.KTX.activity)
+    implementation(Config.Android.KTX.fragment)
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.2")
