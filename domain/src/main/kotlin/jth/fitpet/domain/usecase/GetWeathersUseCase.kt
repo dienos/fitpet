@@ -9,15 +9,26 @@ import jth.fitpet.domain.repository.WeatherRepository
 
 class GetWeathersUseCase(private val repository: WeatherRepository) {
     operator fun invoke(
-        cityName : String,
+        lat : Float,
+        lon : Float,
         scope: CoroutineScope,
-        onResult: (List<WeatherRepo>) -> Unit = {}
+        onResult: (WeatherRepo) -> Unit = {},
+        onFail: (Exception) -> Unit = {}
     ) {
         scope.launch(Dispatchers.Main) {
             val deferred = async(Dispatchers.IO) {
-                repository.getWeathers(cityName)
+                try {
+                    repository.getWeathers(lat, lon)
+                } catch (e : Exception) {
+                    onFail(e)
+                }
             }
-            onResult(deferred.await())
+
+            val result = deferred.await()
+
+            if(result is WeatherRepo) {
+                onResult(result)
+            }
         }
     }
 }
