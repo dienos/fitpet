@@ -29,6 +29,10 @@ object Config {
         const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
     }
 
+    object DataBinding {
+        const val compiler = "androidx.databinding:databinding-compiler:3.2.1"
+    }
+
     object Square {
         private const val retrofitVersion = "2.9.0"
         const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"

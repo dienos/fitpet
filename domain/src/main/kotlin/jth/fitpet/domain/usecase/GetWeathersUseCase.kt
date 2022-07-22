@@ -13,21 +13,27 @@ class GetWeathersUseCase(private val repository: WeatherRepository) {
         lon : Float,
         scope: CoroutineScope,
         onResult: (WeatherRepo) -> Unit = {},
-        onFail: (Exception) -> Unit = {}
+        onFail: (String) -> Unit = {}
     ) {
         scope.launch(Dispatchers.Main) {
             val deferred = async(Dispatchers.IO) {
                 try {
                     repository.getWeathers(lat, lon)
                 } catch (e : Exception) {
-                    onFail(e)
+                    e.message?.let {
+                        onFail(it)
+                    }?:onFail("알 수 없는 에러가 발생하였습니다.")
                 }
             }
 
             val result = deferred.await()
 
             if(result is WeatherRepo) {
-                onResult(result)
+                if(result.cod == "200") {
+                    onResult(result)
+                } else {
+                    onFail(result.message)
+                }
             }
         }
     }

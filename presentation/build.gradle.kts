@@ -64,6 +64,7 @@ dependencies {
 
     implementation(Config.Android.KTX.activity)
     implementation(Config.Android.KTX.fragment)
+    implementation(Config.Android.recyclerView)
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.2")
