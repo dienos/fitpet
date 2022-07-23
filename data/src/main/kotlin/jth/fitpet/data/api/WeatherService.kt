@@ -9,7 +9,7 @@ interface WeatherService {
     suspend fun getWeathers(
         @Query("lat") lat: Float,
         @Query("lon") lon: Float,
-        @Query("cnt") count: Int = 6,
+        @Query("cnt") count: Int = 32,
         @Query("units") units : String = "metric",
         @Query("appid") appId: String = APP_KEY
     ): WeatherRepoRes

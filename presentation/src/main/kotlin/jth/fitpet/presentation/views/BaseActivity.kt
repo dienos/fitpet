@@ -10,6 +10,7 @@ abstract class BaseActivity<T : ViewDataBinding?> : AppCompatActivity() {
     @LayoutRes
     abstract fun getLayoutResId(): Int
     abstract fun initializeViewModel()
+    abstract fun initializeUiEvent()
 
     var binding: T? = null
         private set
@@ -18,6 +19,7 @@ abstract class BaseActivity<T : ViewDataBinding?> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, getLayoutResId())
         initializeViewModel()
+        initializeUiEvent()
     }
 
     override fun onDestroy() {

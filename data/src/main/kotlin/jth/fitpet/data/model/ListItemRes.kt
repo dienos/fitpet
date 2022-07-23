@@ -19,7 +19,7 @@ data class ListItemRes(
     @SerializedName("pop")
     val _pop: Float,
 
-    @SerializedName("dtText")
+    @SerializedName("dt_txt")
     val _dtText: String,
 
     @SerializedName("sys")

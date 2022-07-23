@@ -34,15 +34,19 @@ class WeatherViewModel @Inject constructor(
     }
 
     fun getWeathers() {
+        progress.value = true
+
         val locationData: ArrayList<LocationData> = arrayListOf()
         locationData.add(getLocationData(CityPoint.SEOUL.cityName))
         locationData.add(getLocationData(CityPoint.LONDON.cityName))
         locationData.add(getLocationData(CityPoint.CHICAGO.cityName))
 
         getWeathersUseCase(locationData, viewModelScope, {
+            progress.value = false
             localWeatherRepoData.value = LocalWeatherData(it)
         }, {
-
+            toast.value = it
+            progress.value = false
         })
     }
 }

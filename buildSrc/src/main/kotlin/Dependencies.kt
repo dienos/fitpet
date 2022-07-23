@@ -26,7 +26,16 @@ object Config {
                 "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
         }
 
+        object Splash {
+            const val splashScreen = "androidx.core:core-splashscreen:1.0.0-beta01"
+        }
+
         const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
+    }
+
+    object Glide {
+        const val glide = "com.github.bumptech.glide:glide:4.11.0"
+        const val glideCompiler = "com.github.bumptech.glide:compiler:4.11.0"
     }
 
     object Square {
@@ -56,7 +65,7 @@ object Config {
     }
 
     object Kotlin {
-        private const val kotlinVersion = "1.4.31"
+        private const val kotlinVersion = "1.6.0"
 
         const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 

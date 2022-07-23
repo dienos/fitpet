@@ -39,6 +39,7 @@ class WeatherListAdapter(private val context : Context, private val list: List<W
     override fun getChildView(groupPosition: Int, childPosition: Int, isLastChild: Boolean, convertView: View?, parentView: ViewGroup?): View {
         val binding = WeatherItemBinding.inflate(LayoutInflater.from(context), parentView, false)
         binding.setVariable(BR.item, list[groupPosition].list[childPosition])
+        binding.setVariable(BR.weather_item, list[groupPosition].list[childPosition].weather[0])
 
         return binding.root
     }
