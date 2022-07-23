@@ -24,6 +24,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:weathers="@{viewModel.weatherRepoData.list}"/>
+            app:weathers="@{viewModel.localWeatherRepoData.list}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

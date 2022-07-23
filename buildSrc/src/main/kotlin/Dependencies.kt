@@ -1,5 +1,5 @@
 object Config {
-    const val applicationId = "base.architecture"
+    const val applicationId = "jth.fitpet"
 
     object Android {
         const val androidGradle = "com.android.tools.build:gradle:7.0.2"
@@ -29,10 +29,6 @@ object Config {
         const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
     }
 
-    object DataBinding {
-        const val compiler = "androidx.databinding:databinding-compiler:3.2.1"
-    }
-
     object Square {
         private const val retrofitVersion = "2.9.0"
         const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -60,12 +56,9 @@ object Config {
     }
 
     object Kotlin {
-        private const val kotlinVersion = "1.5.30"
+        private const val kotlinVersion = "1.4.31"
 
         const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-        const val stdLibJDK8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-        const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
 
         object Coroutine {
             private const val coroutineVersion = "1.5.2"
@@ -86,8 +79,6 @@ object Config {
 
     object Version {
         const val buildToolVersion = "30.0.3"
-        const val ndkVersion = "21.3.6528147"
-
         const val minSdk = 21
         const val compileSdk = 31
         const val targetSdk = 31

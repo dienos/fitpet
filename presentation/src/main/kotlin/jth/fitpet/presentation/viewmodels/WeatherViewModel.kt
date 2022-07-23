@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jth.fitpet.domain.model.CityPoint
+import jth.fitpet.domain.model.LocationData
 import jth.fitpet.domain.model.WeatherRepo
 import jth.fitpet.domain.usecase.GetWeathersUseCase
 import javax.inject.Inject
@@ -12,35 +13,36 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(
     private val getWeathersUseCase: GetWeathersUseCase
 ) : BaseViewModel() {
-    data class LocalWeatherData(val list: ArrayList<WeatherRepo>)
+    data class LocalWeatherData(val list: List<WeatherRepo>)
+    val localWeatherRepoData = MutableLiveData<LocalWeatherData>()
 
-    val weatherRepoData = MutableLiveData<LocalWeatherData>()
+    private fun getLocationData(cityName: String): LocationData = when (cityName) {
+        CityPoint.SEOUL.cityName -> {
+            LocationData(CityPoint.SEOUL.lat, CityPoint.SEOUL.lon)
+        }
+
+        CityPoint.LONDON.cityName -> {
+            LocationData(CityPoint.LONDON.lat, CityPoint.LONDON.lon)
+        }
+
+        CityPoint.CHICAGO.cityName -> {
+            LocationData(CityPoint.CHICAGO.lat, CityPoint.CHICAGO.lon)
+        }
+
+        else ->
+            LocationData(0f, 0f)
+    }
 
     fun getWeathers() {
-        val resultData: ArrayList<WeatherRepo> = arrayListOf()
+        val locationData: ArrayList<LocationData> = arrayListOf()
+        locationData.add(getLocationData(CityPoint.SEOUL.cityName))
+        locationData.add(getLocationData(CityPoint.LONDON.cityName))
+        locationData.add(getLocationData(CityPoint.CHICAGO.cityName))
 
-        getWeathersUseCase(CityPoint.SEOUL.lat, CityPoint.SEOUL.lon, viewModelScope, {
-            resultData.add(it)
-
-            getWeathersUseCase(CityPoint.LONDON.lat, CityPoint.LONDON.lon, viewModelScope, {
-                resultData.add(it)
-
-                getWeathersUseCase(CityPoint.CHICAGO.lat, CityPoint.CHICAGO.lon, viewModelScope, {
-                    resultData.add(it)
-
-                    weatherRepoData.value = LocalWeatherData(resultData)
-                }, {
-                    resultData.clear()
-                }
-                )
-            }, {
-                resultData.clear()
-            }
-            )
-
+        getWeathersUseCase(locationData, viewModelScope, {
+            localWeatherRepoData.value = LocalWeatherData(it)
         }, {
-            resultData.clear()
-        }
-        )
+
+        })
     }
 }

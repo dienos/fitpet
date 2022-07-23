@@ -11,7 +11,7 @@ import jth.fitpet.presentation.databinding.WeatherItemBinding
 import jth.fitpet.presentation.databinding.WeatherItemHeaderBinding
 
 
-class WeatherListAdapter(val context : Context, private val list: ArrayList<WeatherRepo>) : BaseExpandableListAdapter() {
+class WeatherListAdapter(private val context : Context, private val list: List<WeatherRepo>) : BaseExpandableListAdapter() {
 
     override fun getGroupCount(): Int = list.size
 
@@ -43,6 +43,6 @@ class WeatherListAdapter(val context : Context, private val list: ArrayList<Weat
         return binding.root
     }
 
-    override fun isChildSelectable(p0: Int, p1: Int): Boolean = true
+    override fun isChildSelectable(groupPosition: Int, childPosition: Int): Boolean = true
 
 }

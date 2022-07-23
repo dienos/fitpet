@@ -6,7 +6,7 @@ import jth.fitpet.domain.model.WeatherRepo
 import jth.fitpet.presentation.views.WeatherListAdapter
 
 @BindingAdapter(value = ["weathers"])
-fun setWeatherList(view: ExpandableListView, list: ArrayList<WeatherRepo>?) {
+fun setWeatherList(view: ExpandableListView, list: List<WeatherRepo>?) {
     list?.let {
         WeatherListAdapter(view.context, list).apply {
             view.setAdapter(this)

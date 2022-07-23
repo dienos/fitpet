@@ -1,7 +1,7 @@
 package jth.fitpet.domain.model
 
-enum class CityPoint(val lat : Float, val lon : Float) {
-    SEOUL(37f, 126f),
-    LONDON(37f, 126f),
-    CHICAGO(37f, 126f)
+enum class CityPoint(val cityName : String, val lat : Float, val lon : Float) {
+    SEOUL("Seoul",37f, 126f),
+    LONDON("London",37f, 126f),
+    CHICAGO("Chicago",37f, 126f)
 }

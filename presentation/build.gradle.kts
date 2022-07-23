@@ -1,12 +1,13 @@
 plugins {
     id(Config.Plugins.application)
     id(Config.Plugins.kotlin)
-    id(Config.Plugins.kapt)
     id(Config.Plugins.hilt)
+    id(Config.Plugins.kapt)
 }
 
 android {
     compileSdk = Config.Version.compileSdk
+    buildToolsVersion = Config.Version.buildToolVersion
 
     defaultConfig {
         applicationId = Config.applicationId
