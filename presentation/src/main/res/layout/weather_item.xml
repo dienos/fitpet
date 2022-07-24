@@ -57,47 +57,61 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
                         android:layout_gravity="bottom"
-                        android:text="@{weather_item.main}"
-                        tools:text="맑음"
+                        android:layout_marginStart="5dp"
+                        android:text="@{weather_item.description}"
                         android:textColor="@color/common_google_signin_btn_text_light_focused"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        tools:text="맑음" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/common_google_signin_btn_text_light_focused"
+                            android:textSize="13sp"
+                            app:max_temp="@{item.main.tempMax}"
+                            tools:text="30 도" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:textColor="@color/common_google_signin_btn_text_light_focused"
+                            android:textSize="13sp"
+                            app:min_temp="@{item.main.tempMin}"
+                            tools:text="30 도" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="10dp"
                         android:textColor="@color/common_google_signin_btn_text_light_focused"
                         android:textSize="13sp"
-                        tools:text="30 도"
-                        app:max_temp="@{item.main.tempMax}" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/common_google_signin_btn_text_light_focused"
-                        android:textSize="13sp"
-                        tools:text="30 도"
-                        android:layout_marginStart="30dp"
-                        app:min_temp="@{item.main.tempMin}" />
-
+                        app:humidity="@{item.main.humidity}"
+                        tools:text="30 도" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
-
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/common_google_signin_btn_text_dark_disabled"
-            app:layout_constraintTop_toBottomOf="@+id/item_root"/>
+            app:layout_constraintTop_toBottomOf="@+id/item_root" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

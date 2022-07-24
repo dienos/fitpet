@@ -70,6 +70,11 @@ fun setMinTempString(view: TextView, temp: Float) {
     view.text = view.context.getString(R.string.min_temp, temp.toString())
 }
 
+@BindingAdapter(value = ["humidity"])
+fun setHumidityString(view: TextView, humidity: Float) {
+    view.text = view.context.getString(R.string.humidity, humidity.toString())
+}
+
 @BindingAdapter(value = ["max_temp"])
 fun setMaxTempString(view: TextView, temp: Float) {
     view.text = view.context.getString(R.string.max_temp, temp.toString())
