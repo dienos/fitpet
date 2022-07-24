@@ -6,4 +6,6 @@
     <string name="humidity" formatted="false">humidity(습도) : %s %%</string>
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
+    <string name="confirm">확인</string>
+    <string name="network_error">네트워크에 연결 되지 않았습니다.\n네트워크 상태를 확인 해주세요.</string>
 </resources>

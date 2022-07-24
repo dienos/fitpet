@@ -2,6 +2,10 @@ object Config {
     const val applicationId = "jth.fitpet"
 
     object Android {
+        const val core = "androidx.core:core-ktx:1.7.0"
+        const val appcompat = "androidx.appcompat:appcompat:1.4.2"
+        const val material = "com.google.android.material:material:1.6.1"
+
         const val androidGradle = "com.android.tools.build:gradle:7.0.2"
 
         object KTX {
@@ -13,6 +17,9 @@ object Config {
             const val jUnitRunner = "androidx.test.runner.AndroidJUnitRunner"
             const val mockk = "io.mockk:mockk:1.11.0"
             const val core = "androidx.arch.core:core-testing:2.1.0"
+            const val jUnit = "androidx.test.ext:junit:1.1.3"
+            const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
+            const val ext = "androidx.test.ext:junit:1.1.3"
         }
 
         object Hilt {

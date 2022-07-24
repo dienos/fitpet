@@ -30,5 +30,9 @@ android {
     dependencies {
         implementation(Config.Kotlin.Coroutine.coroutines)
         testImplementation(Config.Kotlin.Coroutine.coroutineTest)
+
+        testImplementation( Config.Android.Test.jUnit)
+        androidTestImplementation(Config.Android.Test.ext)
+        androidTestImplementation(Config.Android.Test.espresso)
     }
 }

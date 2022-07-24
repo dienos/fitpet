@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import jth.fitpet.presentation.WeatherApplication.Companion.networkUtil
 
 abstract class BaseActivity<T : ViewDataBinding?> : AppCompatActivity() {
     @LayoutRes
@@ -17,6 +18,7 @@ abstract class BaseActivity<T : ViewDataBinding?> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, getLayoutResId())
         initializeViewModel()
         initializeUiEvent()
@@ -25,5 +27,6 @@ abstract class BaseActivity<T : ViewDataBinding?> : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+        networkUtil.terminateNetworkCallback()
     }
 }
