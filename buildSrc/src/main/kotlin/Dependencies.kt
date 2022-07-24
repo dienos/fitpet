@@ -88,7 +88,7 @@ object Config {
 
     object Version {
         const val buildToolVersion = "30.0.3"
-        const val minSdk = 21
+        const val minSdk = 23
         const val compileSdk = 31
         const val targetSdk = 31
         const val versionCode = 1

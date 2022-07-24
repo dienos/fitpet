@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 class WeatherActivity : BaseActivity<WeatherActivityBinding>() {
 
     private lateinit var progress: WeatherLoading
-
     private val _viewModel: WeatherViewModel by viewModels()
     private val viewModel: WeatherViewModel
         get() = _viewModel

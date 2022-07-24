@@ -8,57 +8,51 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.ViewTreeObserver
-import android.view.animation.AnticipateInterpolator
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.animation.doOnEnd
 import jth.fitpet.presentation.R
+import jth.fitpet.presentation.utils.AnimationUtil
 import jth.fitpet.presentation.viewmodels.SplashViewModel
+
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private val viewModel by viewModels<SplashViewModel>()
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.splash_activity)
-
-        val content: View = findViewById(android.R.id.content)
-        content.viewTreeObserver.addOnPreDrawListener(
-            object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    return if (viewModel.complete.value) {
-                        content.viewTreeObserver.removeOnPreDrawListener(this)
-                        startActivity( Intent(this@SplashActivity, WeatherActivity::class.java))
-                        finish()
-                        true
-                    } else {
-                        false
-                    }
-                }
-            }
-        )
-
-        Handler(mainLooper).postDelayed({
-            viewModel.updateComplete()
-        },500)
+        val handler = Handler(mainLooper)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            splashScreen.setOnExitAnimationListener { splashScreenView ->
-                val slideUp = ObjectAnimator.ofFloat(
-                    splashScreenView,
-                    View.TRANSLATION_Y,
-                    0f,
-                    -splashScreenView.height.toFloat()
-                )
-                slideUp.interpolator = AnticipateInterpolator()
-                slideUp.duration = 500L
-
-                slideUp.doOnEnd {
-                    splashScreenView.remove()
+            setContentView(R.layout.splash_activity)
+            val content: View = findViewById(android.R.id.content)
+            content.viewTreeObserver.addOnPreDrawListener(
+                object : ViewTreeObserver.OnPreDrawListener {
+                    override fun onPreDraw(): Boolean {
+                        return if (viewModel.complete.value) {
+                            content.viewTreeObserver.removeOnPreDrawListener(this)
+                            startActivity(Intent(this@SplashActivity, WeatherActivity::class.java))
+                            finish()
+                            true
+                        } else {
+                            false
+                        }
+                    }
                 }
+            )
 
-                slideUp.start()
+            handler.postDelayed({
+                viewModel.updateComplete()
+            }, 500)
+        } else {
+            setContentView(R.layout.splash_activity)
+
+            val aniUtil = AnimationUtil(this, R.drawable.avd_anim)
+            aniUtil.playAnimation(findViewById(R.id.anim)) {
+                startActivity(Intent(this@SplashActivity, WeatherActivity::class.java))
+                finish()
             }
         }
     }
