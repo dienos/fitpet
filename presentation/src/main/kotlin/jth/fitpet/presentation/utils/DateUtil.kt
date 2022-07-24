@@ -5,10 +5,10 @@ import java.util.*
 
 class DateUtil {
     companion object {
-        private const val WEATHER_DATE_FORMAT = "yyyy-MM-dd hh:mm:ss"
-        const val NEW_WEATHER_DATE_FORMAT = "EE dd MMM h:mm a"
-        const val HOUR_MIN_FORMAT = "h:mm a"
-        private const val YEAR_DAY_DATE_FORMAT = "yyyyMMdd"
+        private const val WEATHER_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
+        const val NEW_WEATHER_DATE_FORMAT = "EE dd MMM hh:mm a"
+        const val HOUR_MIN_FORMAT = "hh:mm a"
+        private const val YEAR_DAY_FORMAT = "yyyyMMdd"
 
         fun convertDateStringFormat(
             dateString: String?,
@@ -37,8 +37,8 @@ class DateUtil {
 
         fun differenceDays(dateString: String?): Int {
             dateString?.let {
-                val nowDate = currentDate(YEAR_DAY_DATE_FORMAT)
-                val date = convertDateStringFormat(dateString, YEAR_DAY_DATE_FORMAT, Locale.getDefault())
+                val nowDate = currentDate(YEAR_DAY_FORMAT)
+                val date = convertDateStringFormat(dateString, YEAR_DAY_FORMAT, Locale.getDefault())
 
                 if(nowDate.isEmpty().not() && date.isEmpty().not()) {
                     return date.toInt() - nowDate.toInt()
