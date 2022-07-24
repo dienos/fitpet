@@ -1,4 +1,4 @@
-package recruiting_test_base.presentation
+package fitpet.domain
 
 import org.junit.Test
 
