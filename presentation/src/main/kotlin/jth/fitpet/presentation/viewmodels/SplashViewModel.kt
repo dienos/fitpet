@@ -1,15 +1,11 @@
 package jth.fitpet.presentation.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class SplashViewModel : BaseViewModel() {
-    private val _complete = MutableLiveData<Boolean>()
-    val complete: LiveData<Boolean> get() = _complete
-
-    init {
-        _complete.value = false
-    }
+    private val _complete = MutableStateFlow(false)
+    val complete = _complete.asStateFlow()
 
     fun updateComplete(){
         _complete.value = true

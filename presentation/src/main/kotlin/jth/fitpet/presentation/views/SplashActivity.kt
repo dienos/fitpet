@@ -1,6 +1,7 @@
 package jth.fitpet.presentation.views
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.core.animation.doOnEnd
 import jth.fitpet.presentation.R
 import jth.fitpet.presentation.viewmodels.SplashViewModel
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     private val viewModel by viewModels<SplashViewModel>()
 
@@ -25,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
         content.viewTreeObserver.addOnPreDrawListener(
             object : ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
-                    return if (viewModel.complete.value == true) {
+                    return if (viewModel.complete.value) {
                         content.viewTreeObserver.removeOnPreDrawListener(this)
                         startActivity( Intent(this@SplashActivity, WeatherActivity::class.java))
                         finish()
@@ -43,7 +45,6 @@ class SplashActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             splashScreen.setOnExitAnimationListener { splashScreenView ->
-                // Create your custom animation.
                 val slideUp = ObjectAnimator.ofFloat(
                     splashScreenView,
                     View.TRANSLATION_Y,
@@ -59,9 +60,6 @@ class SplashActivity : AppCompatActivity() {
 
                 slideUp.start()
             }
-        } else {
-            startActivity( Intent(this@SplashActivity, WeatherActivity::class.java))
-            finish()
         }
     }
 }

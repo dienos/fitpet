@@ -3,4 +3,6 @@
 
     <string name="max_temp">Max : %s \u2103</string>
     <string name="min_temp">Min : %s \u2103</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
 </resources>

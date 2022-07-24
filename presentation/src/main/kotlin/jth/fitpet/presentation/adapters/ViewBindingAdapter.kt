@@ -7,7 +7,9 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import jth.fitpet.domain.model.WeatherRepo
 import jth.fitpet.presentation.R
+import jth.fitpet.presentation.utils.DateUtil
 import jth.fitpet.presentation.views.WeatherListAdapter
+import java.util.*
 
 @BindingAdapter(value = ["weathers"])
 fun setWeatherList(view: ExpandableListView, list: List<WeatherRepo>?) {
@@ -15,7 +17,7 @@ fun setWeatherList(view: ExpandableListView, list: List<WeatherRepo>?) {
         WeatherListAdapter(view.context, list).apply {
             view.setAdapter(this)
 
-            if(groupCount > 0) {
+            if (groupCount > 0) {
                 for (i in 0 until groupCount) {
                     view.expandGroup(i)
                 }
@@ -25,8 +27,36 @@ fun setWeatherList(view: ExpandableListView, list: List<WeatherRepo>?) {
 }
 
 @BindingAdapter(value = ["dayString"])
-fun setDayString(view: TextView, time: String) {
-    view.text = time
+fun setDayString(view: TextView, dateString: String?) {
+    dateString?.let {
+        val dayString = when (DateUtil.differenceDays(it)) {
+            0 -> {
+                view.context.getString(R.string.today).plus(" ").plus(
+                    DateUtil.convertDateStringFormat(
+                        it,
+                        DateUtil.HOUR_MIN_FORMAT,
+                        Locale("en")
+                    )
+                )
+            }
+
+            1 -> {
+                view.context.getString(R.string.tomorrow).plus(" ").plus(
+                    DateUtil.convertDateStringFormat(
+                        it,
+                        DateUtil.HOUR_MIN_FORMAT,
+                        Locale("en")
+                    )
+                )
+            }
+
+            else -> {
+                DateUtil.convertDateStringFormat(it, DateUtil.NEW_WEATHER_DATE_FORMAT, Locale("en"))
+            }
+        }
+
+        view.text = dayString
+    }
 }
 
 @BindingAdapter(value = ["weather_img"])
