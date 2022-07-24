@@ -22,7 +22,8 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val networkUtil = NetworkUtil(this)
+        networkUtil = NetworkUtil(this)
+        networkUtil.registerNetworkCallback()
 
         setContentView(R.layout.splash_activity)
 
@@ -57,7 +58,7 @@ class SplashActivity : AppCompatActivity() {
                 }
             }
         } else {
-            networkUtil.networkNotConnect(this)
+            networkUtil.networkNotConnect()
         }
     }
 }

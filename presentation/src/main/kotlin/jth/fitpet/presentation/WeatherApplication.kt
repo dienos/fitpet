@@ -14,7 +14,5 @@ class WeatherApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        networkUtil = NetworkUtil(this)
-        networkUtil.registerNetworkCallback()
     }
 }

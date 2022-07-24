@@ -2,7 +2,9 @@ package jth.fitpet.presentation.utils
 
 import android.content.Context
 import android.net.*
+import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import jth.fitpet.presentation.R
 import jth.fitpet.presentation.views.WeatherDialogFragment
 
@@ -13,7 +15,7 @@ class NetworkUtil constructor(val context: Context?) {
         }
 
         override fun onLost(network: Network) {
-            networkNotConnect(context)
+            Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -39,11 +41,15 @@ class NetworkUtil constructor(val context: Context?) {
         connectivityManager?.unregisterNetworkCallback(networkCallBack)
     }
 
-    fun networkNotConnect(context: Context?) {
+    fun networkNotConnect() {
         if(context is FragmentActivity) {
-            WeatherDialogFragment(context.getString(R.string.network_error)) {
-                context.finish()
-            }.show(context.supportFragmentManager, "Custom")
+            val fragmentManager: FragmentManager = context.supportFragmentManager
+
+            if (fragmentManager.isDestroyed.not()) {
+                WeatherDialogFragment(context.getString(R.string.network_error)) {
+                    context.finish()
+                }.show(context.supportFragmentManager, "Custom")
+            }
         }
     }
 }
