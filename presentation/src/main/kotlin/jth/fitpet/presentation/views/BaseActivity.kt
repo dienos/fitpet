@@ -24,9 +24,13 @@ abstract class BaseActivity<T : ViewDataBinding?> : AppCompatActivity() {
         initializeUiEvent()
     }
 
+    override fun onStop() {
+        super.onStop()
+        networkUtil.terminateNetworkCallback()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null
-        networkUtil.terminateNetworkCallback()
     }
 }
